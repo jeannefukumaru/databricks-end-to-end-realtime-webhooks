@@ -5,7 +5,7 @@ trigger:
 
 variables:
   # Azure service connection established during pipeline creation
-  azureSubscription: 'sc_mlflow_test'
+  azureSubscription: 'field-eng'
   appName: $(AZURE_FUNCTION_APP)
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
