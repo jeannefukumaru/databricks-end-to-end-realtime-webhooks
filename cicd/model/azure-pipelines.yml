@@ -2,7 +2,7 @@ trigger:
   none
 
 variables:
-# - group: modelVariableGroup
+- group: realtime-webhook
 - name: modelName
   value: $(model_name)
 - name: webhookId
