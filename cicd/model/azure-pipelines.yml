@@ -8,7 +8,7 @@ variables:
 - name: webhookId
   value: $(webhook_id)
 - name: modelVersion
-  value: $(version)
+  value: 1
 - name: dockerRegistrySc
   value: $(registryServiceConnection) #'sc_mlflow_docker'
 - name: acrRegistry
