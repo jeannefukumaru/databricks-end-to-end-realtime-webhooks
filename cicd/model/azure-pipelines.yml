@@ -47,7 +47,7 @@ stages:
             versionSpec: '3.7'
             architecture: 'x64'
         - bash: |
-            pip install mlflow
+            pip install --upgrade mlflow
           displayName: "Install MLflow"
         - task: PythonScript@0
           displayName: "Download model artifacts"
@@ -64,7 +64,8 @@ stages:
               run_id = model_version.run_id
               print(f"run id: {run_id}")
               # Download the artifact to local storage.
-              local_dir = "ml_artifacts"
+              # local_dir = "ml_artifacts"
+              local_dir = "/home/vsts/work/1/s/ml_artifacts"
               remote_dir = "model"
               os.mkdir(local_dir)
               print(f"local_dir: {local_dir}")
