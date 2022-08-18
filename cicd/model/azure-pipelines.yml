@@ -66,7 +66,7 @@ stages:
               print(f"run id: {run_id}")
               # Download the artifact to local storage.
               local_dir = "ml_artifacts"
-              remote_dir = "explainer_on_data_validation"
+              remote_dir = "train/model"
               os.mkdir(local_dir)
               print(f"local_dir: {local_dir}")
               print(f"local dir full path: {os.path.abspath(local_dir)}")
@@ -83,7 +83,7 @@ stages:
         - task: CopyFiles@2
           displayName: 'Copy model artifacts to Service Layer'
           inputs:
-            contents: 'ml_artifacts/explainer_on_data_validation/**'
+            contents: 'ml_artifacts/train/model/**'
             targetFolder: '$(System.DefaultWorkingDirectory)/service/'
         - task: CopyFiles@2
           displayName: 'Copy Docker Image to Artifact Staging'
@@ -108,7 +108,7 @@ stages:
               artifact: dropDocker
               path: '$(Pipeline.Workspace)'
           - bash: |
-              ls -all $(Pipeline.Workspace)/service/ml_artifacts/explainer_on_data_validation
+              ls -all $(Pipeline.Workspace)/service/ml_artifacts/train/model
             displayName: List downloaded artifacts
           - task: Docker@2
             displayName: Build
