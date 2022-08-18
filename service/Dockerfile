@@ -7,10 +7,10 @@ WORKDIR /app
 #Copy dependency lists & artifacts
 COPY . /app
 COPY ./requirements_api.txt /tmp/requirements_api.txt
-COPY ./ml_artifacts/model/requirements.txt /tmp/requirements_model.txt
-COPY ./ml_artifacts/model /model
+COPY ./ml_artifacts/train/model/requirements.txt /tmp/requirements_model.txt
+COPY ./ml_artifacts/train/model /model
 COPY ./requirements_api.txt /tmp/requirements_api.txt
-COPY ./ml_artifacts/model/requirements.txt /tmp/requirements_model.txt
+COPY ./ml_artifacts/train/model/requirements.txt /tmp/requirements_model.txt
 RUN chown -R mymodel:mymodel /app && chown -R mymodel:mymodel /model
 RUN pip install --no-cache-dir --upgrade -r /tmp/requirements_api.txt \
     && pip install --no-cache-dir -r /tmp/requirements_model.txt
