@@ -7,8 +7,8 @@ WORKDIR /app
 #Copy dependency lists & artifacts
 COPY . /app
 COPY ./requirements_api.txt /tmp/requirements_api.txt
-COPY ./ml_artifacts/model/requirements.txt /tmp/requirements_model.txt
-COPY ./ml_artifacts/model /model
+COPY ./ml_artifacts/explainer_on_data_validation/requirements.txt /tmp/requirements_model.txt
+COPY ./ml_artifacts/explainer_on_data_validation /model
 COPY ./requirements_api.txt /tmp/requirements_api.txt
 COPY ./ml_artifacts/model/requirements.txt /tmp/requirements_model.txt
 RUN chown -R mymodel:mymodel /app && chown -R mymodel:mymodel /model
