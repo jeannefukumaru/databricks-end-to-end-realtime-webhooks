@@ -67,7 +67,7 @@ stages:
               # Download the artifact to local storage.
               # local_dir = "ml_artifacts"
               # local_dir = "/home/vsts/work/1/s/ml_artifacts"
-              remote_dir = "model"
+              remote_dir = "explainer_on_data_validation"
               # os.mkdir(local_dir)
               # print(f"local_dir: {local_dir}")
               # print(f"local dir full path: {os.path.abspath(local_dir)}")
