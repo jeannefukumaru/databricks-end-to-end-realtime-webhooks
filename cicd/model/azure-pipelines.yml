@@ -85,7 +85,7 @@ stages:
         - task: CopyFiles@2
           displayName: 'Copy model artifacts to Service Layer'
           inputs:
-            contents: 'ml_artifacts/model/**'
+            contents: 'ml_artifacts/explainer_on_data_validation/**'
             targetFolder: '$(System.DefaultWorkingDirectory)/service/'
         - task: CopyFiles@2
           displayName: 'Copy Docker Image to Artifact Staging'
@@ -110,7 +110,7 @@ stages:
               artifact: dropDocker
               path: '$(Pipeline.Workspace)'
           - bash: |
-              ls -all $(Pipeline.Workspace)/service/ml_artifacts/model
+              ls -all $(Pipeline.Workspace)/service/ml_artifacts/explainer_on_data_validation
             displayName: List downloaded artifacts
           - task: Docker@2
             displayName: Build
