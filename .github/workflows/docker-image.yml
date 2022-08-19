@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  pull_request:
+    branches: [ "master" ]
+    
+env:
+  MODEL_NAME: taxi_fare_regressor
+  MODEL_VERSION: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      
+      - name: test python script
+        uses: jannekem/run-python-script-action@v1
+        with:
+          script: |
+            import os
+            print("Directory contents:")
+            for f in os.listdir():
+                print(f)
