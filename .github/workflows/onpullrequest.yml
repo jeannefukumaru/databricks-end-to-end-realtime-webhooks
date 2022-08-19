@@ -31,4 +31,4 @@ jobs:
           python -m pip install --upgrade pip
       - name: Install dependencies and project in dev mode
         run: |
-          print("requirements installed")
+          echo requirements installed
