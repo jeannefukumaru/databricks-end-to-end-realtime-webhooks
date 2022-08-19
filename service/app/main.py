@@ -27,6 +27,12 @@ async def startup_load_model():
     global MODEL
     MODEL = load_model(MODEL_ARTIFACT_PATH)
 
+@app.get("/test")
+async def test_endpoint():
+    """
+    Test that the endpoint is working
+    """
+    return {"response": "endpoint reached"}
 
 @app.post("/predict")
 async def predict(item: Item):
