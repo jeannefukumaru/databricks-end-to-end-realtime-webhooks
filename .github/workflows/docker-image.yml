@@ -69,4 +69,18 @@ jobs:
               if file != "code":
                 shutil.copy2(os.path.join(full_path, file), dest_path)            
             print(f"artifacts moved to service folder {os.listdir(dest_path)}")
+        
+        - name: ACR build
+          id: acr
+          uses: azure/acr-build@v1
+          with:
+            service_principal: ${{ secrets.service_principal }}
+            service_principal_password: ${{ secrets.service_principal_password }}
+            tenant: ${{ secrets.tenant }}
+            registry: ${{ secrets.registry }}
+            repository: ${{ secrets.repository }}
+            image: image
+            git_access_token: ${{ secrets.git_access_token }}
+            folder: ./service
+            dockerfile: ./service/Dockerfile
 
