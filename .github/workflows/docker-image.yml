@@ -60,6 +60,7 @@ jobs:
             full_path = f"{local_dir}/{remote_dir}"
             print(f"Artifacts downloaded in {full_path}: {os.listdir(full_path)}")
 
-            shutil.copy2("./ml_artifacts", "./service/ml_artifacts")            
+            for file in os.listdir(full_path):
+              shutil.copy2(os.path.join(full_path, file), "./service/ml_artifacts")            
             print(f"artifacts moved to service folder {os.listdir('./service/ml_artifacts')}")
 
