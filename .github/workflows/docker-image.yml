@@ -39,6 +39,8 @@ jobs:
             import os
             from mlflow.tracking import MlflowClient
             import mlflow
+            import shutil
+
             client = MlflowClient()
             model_version = client.get_model_version(
               name = os.environ["MODEL_NAME"],
@@ -46,6 +48,7 @@ jobs:
             )
             run_id = model_version.run_id
             print(f"run id: {run_id}")
+
             # Download the artifact to local storage.
             local_dir = "ml_artifacts"
             remote_dir = "train/model"
@@ -53,6 +56,10 @@ jobs:
             print(f"local_dir: {local_dir}")
             print(f"local dir full path: {os.path.abspath(local_dir)}")
             local_path = client.download_artifacts(run_id, remote_dir, local_dir)
-            # local_path = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=remote_dir)
+
             full_path = f"{local_dir}/{remote_dir}"
             print(f"Artifacts downloaded in {full_path}: {os.listdir(full_path)}")
+
+            shutil.copy2("./ml_artifacts", "./service/ml_artifacts")            
+            print(f"artifacts moved to service folder {os.listdir("./service/ml_artifacts)}")
+
