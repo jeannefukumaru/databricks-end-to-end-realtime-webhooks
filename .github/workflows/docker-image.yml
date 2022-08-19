@@ -60,8 +60,13 @@ jobs:
             full_path = f"{local_dir}/{remote_dir}"
             print(f"Artifacts downloaded in {full_path}: {os.listdir(full_path)}")
 
+            print(f"copying downloaded model artefacts to docker folder")
+            dest_path = "./service/ml_artifacts"
+            if not os.path.isdir(dest_path):
+              os.mkdir(dest_path)
+
             for file in os.listdir(full_path):
               if file != "code":
-                shutil.copy2(os.path.join(full_path, file), "./service/ml_artifacts")            
-            print(f"artifacts moved to service folder {os.listdir('./service/ml_artifacts')}")
+                shutil.copy2(os.path.join(full_path, file), dest_path)            
+            print(f"artifacts moved to service folder {os.listdir(dest_path)}")
 
