@@ -25,7 +25,7 @@ jobs:
           python-version: 3.9.5
 
       - name: Install pip
-        run: |
+        run:
           python -m pip install --upgrade pip
           pip install mlflow
       
