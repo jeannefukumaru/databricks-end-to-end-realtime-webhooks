@@ -18,9 +18,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+
+      - name: setup Python
+      - uses: actions/setup-python@v3
+        with:
+          python-version: 3.9.5
+
+      - name: install dependencies
+        run: |
+        pip install mlflow
       
-      - name: test python script
+      - name: download model artifacts from workspace
         uses: jannekem/run-python-script-action@v1
         with:
           script: |
