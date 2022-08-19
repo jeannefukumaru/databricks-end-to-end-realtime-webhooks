@@ -60,8 +60,8 @@ jobs:
             full_path = f"{local_dir}/{remote_dir}"
             print(f"Artifacts downloaded in {full_path}: {os.listdir(full_path)}")
 
-            print(f"copying downloaded model artefacts to docker folder")
-            dest_path = "./service/ml_artifacts/train/model"
+            print(f"copying downloaded model artifacts to docker folder")
+            dest_path = "./service/ml_artifacts"
             if not os.path.isdir(dest_path):
               os.mkdir(dest_path)
 
