@@ -33,3 +33,4 @@ jobs:
         run: |
           pip install -r unit-requirements.txt
           pip install -e .
+          print("requirements installed")
