@@ -61,5 +61,5 @@ jobs:
             print(f"Artifacts downloaded in {full_path}: {os.listdir(full_path)}")
 
             shutil.copy2("./ml_artifacts", "./service/ml_artifacts")            
-            print(f"artifacts moved to service folder {os.listdir("./service/ml_artifacts)}")
+            print(f"artifacts moved to service folder {os.listdir('./service/ml_artifacts')}")
 
