@@ -85,4 +85,3 @@ jobs:
           folder: ./service
           dockerfile: ./Dockerfile
           build_args: no-cache
-
