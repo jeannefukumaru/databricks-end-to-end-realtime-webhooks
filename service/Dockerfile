@@ -6,7 +6,7 @@ WORKDIR /app
 
 #Copy dependency lists & artifacts
 COPY . /app
-RUN pwd && ls
+RUN echo pwd && echo ls
 COPY ./requirements_api.txt /tmp/requirements_api.txt
 COPY ./ml_artifacts/requirements.txt /tmp/requirements_model.txt
 COPY ./ml_artifacts /model
