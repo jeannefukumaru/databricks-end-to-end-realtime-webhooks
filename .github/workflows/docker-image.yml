@@ -82,8 +82,10 @@ jobs:
       - name: docker build and push to acr
         run: |
           cd service && ls
-          docker build -t "realtime-serving" .
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/realtime-serving:${{ github.sha }}
+          docker build -t realtime-serving:latest .
+          docker image tag realtime-serving:latest ${{ secrets.ACR_LOGIN_SERVER }}/taxi_fare_regressor:${{ github.sha }}
+          docker image push ${{ secrets.ACR_LOGIN_SERVER }}/taxi_fare_regressor:${{ github.sha }}
+          docker image ls
             
   #     - name: Upload ml artifacts
   #       uses: actions/upload-artifact@v3
