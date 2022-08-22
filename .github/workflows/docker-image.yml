@@ -14,7 +14,7 @@ env:
 
 
 jobs:
-  build:
+  download artifacts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -71,7 +71,24 @@ jobs:
               if file != "code":
                 shutil.copy2(os.path.join(full_path, file), dest_path)            
             print(f"artifacts moved to service folder {dest_path} {os.listdir(dest_path)}")
-        
+            
+      - name: Upload ml artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ml_artifacts
+          path: ./ml_artifacts
+  
+  build_docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download ml artifacts to transfer to Docker image
+        uses: actions/download-artifact@v3
+        with:
+          name: ml_artifacts
+      - shell: bash
+        run: |
+          cp ./ml_artifacts ./service/ml_artifacts
+
       - name: ACR build
         uses: azure/acr-build@v1
         with:
