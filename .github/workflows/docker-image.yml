@@ -32,7 +32,7 @@ jobs:
         run: |
           pip install mlflow
       
-      - name: download model artifacts from workspaceß
+      - name: download model artifacts from workspace
         uses: jannekem/run-python-script-action@v1
         with:
           script: |
@@ -62,47 +62,60 @@ jobs:
             full_path = f"{local_dir}/{remote_dir}"
             print(f"Artifacts downloaded in {full_path}: {os.listdir(full_path)}")
 
-            # print(f"copying downloaded model artifacts to docker folder")
-            # dest_path = "./service/ml_artifacts/train/model"
-            # if not os.path.isdir(dest_path):
-            #   os.makedirs(dest_path)
+            print(f"copying downloaded model artifacts to docker folder")
+            dest_path = "./service/ml_artifacts/train/model"
+            if not os.path.isdir(dest_path):
+              os.makedirs(dest_path)
 
-            # for file in os.listdir(full_path):
-            #   if file != "code":
-            #     shutil.copy2(os.path.join(full_path, file), dest_path)            
-            # print(f"artifacts moved to service folder {dest_path} {os.listdir(dest_path)}")
+            for file in os.listdir(full_path):
+              if file != "code":
+                shutil.copy2(os.path.join(full_path, file), dest_path)            
+            print(f"artifacts moved to service folder {dest_path} {os.listdir(dest_path)}")
+
+      - name: docker login
+        uses: azure/docker-login@v1
+        with:
+          login-server:  ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.SERVICE_PRINCIPAL }}
+          password: ${{ secrets.SERVICE_PRINCIPAL_PASSWORD }}
+      
+      - name: docker build and push to acr
+        run: |
+          cd service && ls
+          docker build -t "realtime-serving" .
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/realtime-serving:${{ github.sha }}
             
-      - name: Upload ml artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: ml_artifacts
-          path: ./ml_artifacts
-      - shell: bash
-        run: |
-          ls ./ml_artifacts
+  #     - name: Upload ml artifacts
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: ml_artifacts
+  #         path: ./ml_artifacts
+  #     - shell: bash
+  #       run: |
+  #         ls ./ml_artifacts
   
-  build_docker:
-    runs-on: ubuntu-latest
-    needs: download_artifacts
-    steps:
-      - name: Download ml artifacts to transfer to Docker image
-        uses: actions/download-artifact@v3
-        with:
-          name: ml_artifacts
-      - shell: bash
-        run: |
-          # ls ./ml_artifacts/train/model && cp ./ml_artifacts ./service/ml_artifacts
-          ls && pwd
+  # build_docker:
+  #   runs-on: ubuntu-latest
+  #   needs: download_artifacts
+  #   steps:
+  #     - name: Download ml artifacts to transfer to Docker image
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: ml_artifacts
+  #     - shell: bash
+  #       run: |
+  #         # ls ./ml_artifacts/train/model && cp ./ml_artifacts ./service/ml_artifacts
+  #         ls && pwd
 
-      - name: ACR build
-        uses: azure/acr-build@v1
-        with:
-          service_principal: ${{ secrets.service_principal }}
-          service_principal_password: ${{ secrets.service_principal_password }}
-          tenant: ${{ secrets.tenant }}
-          registry: ${{ secrets.registry }}
-          repository: ${{ secrets.repository }}
-          image: image
-          git_access_token: ${{ secrets.GH_TOKEN }}
-          folder: ./service
-          dockerfile: ./Dockerfile
+  #     - name: ACR build
+  #       uses: azure/acr-build@v1
+  #       with:
+  #         service_principal: ${{ secrets.service_principal }}
+  #         service_principal_password: ${{ secrets.service_principal_password }}
+  #         tenant: ${{ secrets.tenant }}
+  #         registry: ${{ secrets.registry }}
+  #         repository: ${{ secrets.repository }}
+  #         image: image
+  #         git_access_token: ${{ secrets.GH_TOKEN }}
+  #         folder: ./service
+  #         dockerfile: ./Dockerfile
