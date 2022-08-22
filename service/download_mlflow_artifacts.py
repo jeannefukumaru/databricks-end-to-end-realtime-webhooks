@@ -2,10 +2,15 @@ import os
 from mlflow.tracking import MlflowClient
 import mlflow
 import shutil
-client = MlflowClient(os.environ["MLFLOW_TRACKING_URI"])
+
+MLFLOW_TRACKING_URI = "databricks"
+MODEL_NAME = "taxi_fare_regressor"
+MODEL_VERSION = 1
+
+client = MlflowClient(MLFLOW_TRACKING_URI)
 model_version = client.get_model_version(
-  name = os.environ["MODEL_NAME"],
-  version = os.environ["MODEL_VERSION"]
+  name = MODEL_NAME,
+  version = MODEL_VERSION
 )
 run_id = model_version.run_id
 print(f"run id: {run_id}")
