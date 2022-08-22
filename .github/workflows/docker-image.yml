@@ -84,4 +84,3 @@ jobs:
           git_access_token: ${{ secrets.GH_TOKEN }}
           folder: ./service
           dockerfile: ./Dockerfile
-          build_args: no-cache

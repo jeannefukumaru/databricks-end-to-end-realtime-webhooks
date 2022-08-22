@@ -8,8 +8,8 @@ WORKDIR /app
 COPY . /app
 RUN echo pwd && echo ls
 COPY ./requirements_api.txt /tmp/requirements_api.txt
-COPY ./ml_artifacts/requirements.txt /tmp/requirements_model.txt
-COPY ./ml_artifacts /model
+COPY ./ml_artifacts/train/model/requirements.txt /tmp/requirements_model.txt
+COPY ./ml_artifacts/train/model /model
 COPY ./requirements_api.txt /tmp/requirements_api.txt
 # COPY ./ml_artifacts/requirements.txt /tmp/requirements_model.txt
 RUN chown -R mymodel:mymodel /app && chown -R mymodel:mymodel /model
