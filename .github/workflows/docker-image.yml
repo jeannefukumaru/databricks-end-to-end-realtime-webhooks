@@ -86,38 +86,3 @@ jobs:
           docker image tag realtime-serving:latest ${{ secrets.ACR_LOGIN_SERVER }}/taxi_fare_regressor:${{ github.sha }}
           docker image push ${{ secrets.ACR_LOGIN_SERVER }}/taxi_fare_regressor:${{ github.sha }}
           docker image ls
-            
-  #     - name: Upload ml artifacts
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: ml_artifacts
-  #         path: ./ml_artifacts
-  #     - shell: bash
-  #       run: |
-  #         ls ./ml_artifacts
-  
-  # build_docker:
-  #   runs-on: ubuntu-latest
-  #   needs: download_artifacts
-  #   steps:
-  #     - name: Download ml artifacts to transfer to Docker image
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: ml_artifacts
-  #     - shell: bash
-  #       run: |
-  #         # ls ./ml_artifacts/train/model && cp ./ml_artifacts ./service/ml_artifacts
-  #         ls && pwd
-
-  #     - name: ACR build
-  #       uses: azure/acr-build@v1
-  #       with:
-  #         service_principal: ${{ secrets.service_principal }}
-  #         service_principal_password: ${{ secrets.service_principal_password }}
-  #         tenant: ${{ secrets.tenant }}
-  #         registry: ${{ secrets.registry }}
-  #         repository: ${{ secrets.repository }}
-  #         image: image
-  #         git_access_token: ${{ secrets.GH_TOKEN }}
-  #         folder: ./service
-  #         dockerfile: ./Dockerfile
