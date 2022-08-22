@@ -14,7 +14,7 @@ COPY ./requirements_api.txt /tmp/requirements_api.txt
 RUN chown -R mymodel:mymodel /app && chown -R mymodel:mymodel /model
 RUN pip install --no-cache-dir --upgrade -r /tmp/requirements_api.txt \
     && pip install --no-cache-dir -r /tmp/requirements_model.txt
-
+RUN echo finished
 #Runtime
 
 FROM builder as prod
