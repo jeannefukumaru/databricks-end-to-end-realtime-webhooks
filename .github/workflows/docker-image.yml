@@ -91,7 +91,8 @@ jobs:
           name: ml_artifacts
       - shell: bash
         run: |
-          ls ./ml_artifacts/train/model && cp ./ml_artifacts ./service/ml_artifacts
+          # ls ./ml_artifacts/train/model && cp ./ml_artifacts ./service/ml_artifacts
+          ls && pwd
 
       - name: ACR build
         uses: azure/acr-build@v1
