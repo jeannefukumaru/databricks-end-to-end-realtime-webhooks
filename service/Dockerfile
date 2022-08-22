@@ -7,6 +7,7 @@ WORKDIR /app
 #Copy dependency lists & artifacts
 COPY . /app
 COPY ./requirements_api.txt /tmp/requirements_api.txt
+COPY ../train ./ml_artifacts
 # RUN pip install mlflow && python download_mlflow_artifacts.py
 COPY ./ml_artifacts/train/model/requirements.txt /tmp/requirements_model.txt
 COPY ./ml_artifacts/train/model /model
