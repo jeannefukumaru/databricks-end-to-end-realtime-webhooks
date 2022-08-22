@@ -81,7 +81,6 @@ jobs:
           registry: ${{ secrets.registry }}
           repository: ${{ secrets.repository }}
           image: image
-          branch: test
           git_access_token: ${{ secrets.GH_TOKEN }}
           folder: ./service
           dockerfile: ./Dockerfile
