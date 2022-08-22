@@ -77,7 +77,7 @@ jobs:
         with:
           name: ml_artifacts
           path: ./ml_artifacts
-        shell: bash
+      - shell: bash
         run: |
           ls ./ml_artifacts
   
