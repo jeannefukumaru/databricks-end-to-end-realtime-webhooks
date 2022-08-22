@@ -72,18 +72,18 @@ jobs:
                 shutil.copy2(os.path.join(full_path, file), dest_path)            
             print(f"artifacts moved to service folder {dest_path} {os.listdir(dest_path)}")
 
-        - name: docker login
-          uses: azure/docker-login@v1
-          with:
-            login-server:  ${{ secrets.ACR_LOGIN_SERVER }}
-            username: ${{ secrets.SERVICE_PRINCIPAL }}
-            password: ${{ secrets.SERVICE_PRINCIPAL_PASSWORD }}
-        
-        - name: docker build and push to acr
-          run: |
-          cd service
-          docker build -t "realtime-serving" .
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/realtime-serving:${{ github.sha }}
+      - name: docker login
+        uses: azure/docker-login@v1
+        with:
+          login-server:  ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.SERVICE_PRINCIPAL }}
+          password: ${{ secrets.SERVICE_PRINCIPAL_PASSWORD }}
+      
+      - name: docker build and push to acr
+        run: |
+        cd service
+        docker build -t "realtime-serving" .
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/realtime-serving:${{ github.sha }}
             
   #     - name: Upload ml artifacts
   #       uses: actions/upload-artifact@v3
