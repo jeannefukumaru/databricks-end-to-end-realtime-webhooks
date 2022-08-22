@@ -32,7 +32,7 @@ jobs:
         run: |
           pip install mlflow
       
-      - name: download model artifacts from workspace
+      - name: download model artifacts from workspaceß
         uses: jannekem/run-python-script-action@v1
         with:
           script: |
@@ -63,9 +63,9 @@ jobs:
             print(f"Artifacts downloaded in {full_path}: {os.listdir(full_path)}")
 
             print(f"copying downloaded model artifacts to docker folder")
-            dest_path = "./service/ml_artifacts"
+            dest_path = "./service/ml_artifacts/train/model"
             if not os.path.isdir(dest_path):
-              os.mkdir(dest_path)
+              os.makedirs(dest_path)
 
             for file in os.listdir(full_path):
               if file != "code":
