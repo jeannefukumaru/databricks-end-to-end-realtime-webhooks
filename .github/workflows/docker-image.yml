@@ -92,7 +92,7 @@ jobs:
       - shell: bash
         run: |
           # ls ./ml_artifacts/train/model && cp ./ml_artifacts ./service/ml_artifacts
-          ls
+          ls && pwd
 
       - name: ACR build
         uses: azure/acr-build@v1
